@@ -7,6 +7,18 @@ GRANT ALL PRIVILEGES ON *.* TO 'korea'@'%';
 create database koreadb;
 ```
 
+### 더미데이터
+```sql
+INSERT INTO user(username, PASSWORD) VALUES('ssar', '1234');
+INSERT INTO user(username, PASSWORD) VALUES('cos', '1234');
+
+INSERT INTO post(title, content, user_id) VALUES('제목1', '내용1', 1);
+INSERT INTO post(title, content, user_id) VALUES('제목2', '내용2', 1);
+INSERT INTO post(title, content, user_id) VALUES('제목3', '내용3', 1);
+INSERT INTO post(title, content, user_id) VALUES('제목4', '내용4', 2);
+INSERT INTO post(title, content, user_id) VALUES('제목5', '내용5', 2);
+```
+
 ### 추가 의존성
 ```xml
 <dependency>
