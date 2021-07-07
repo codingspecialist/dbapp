@@ -1,4 +1,4 @@
-package com.korea.dbapp.web;
+package com.korea.dbapp.util;
 
 public class Script {
 

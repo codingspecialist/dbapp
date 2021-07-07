@@ -5,28 +5,28 @@
 <div class="container">
 
 	<!-- username=머시기&password=머시기&email=머시기&address=머시기 -->
-	<form action="/auth/join" method="post">
+	<form action="/user/${principal.id}" method="post">
 		<div class="form-group">
 			<label for="username">Username:</label> 
-			<input type="text" class="form-control" placeholder="Enter username"  name="username">
+			<input value="${principal.username}"  type="text" class="form-control" placeholder="Enter username"  name="username"  readonly="readonly"/>
 		</div>
 		<div class="form-group">
 			<label for="password">Password:</label> 
-			<input type="password" class="form-control" placeholder="Enter password"  name="password" />
+			<input value="${principal.password}" type="password" class="form-control" placeholder="Enter password"  name="password"  required="required"/>
 		</div>
 		<div class="form-group">
 			<label for="email">Email:</label> 
-			<input type="email" class="form-control" placeholder="Enter email"  name="email" />
+			<input value="${principal.email}" type="email" class="form-control" placeholder="Enter email"  name="email"  readonly="readonly"/>
 		</div>
 		
 		<input class="btn btn-info"  type="button" onClick="goPopup();" value="주소찾기"/>
 		<div class="form-group">
 			<label for="address">Address:</label> 
-			<input type="text" class="form-control" placeholder="Enter address"  name="address"  id="address"  
+			<input value="${principal.address}" type="text" class="form-control" placeholder="Enter address"  name="address"  id="address"  
 			readonly="readonly"/>
 		</div>
 
-		<button type="submit" class="btn btn-primary">회원가입</button>
+		<button type="submit" class="btn btn-primary">회원수정</button>
 	</form>
 	
 </div>

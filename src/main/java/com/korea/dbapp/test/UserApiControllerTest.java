@@ -41,9 +41,11 @@ public class UserApiControllerTest {
 	
 	// http://localhost:8000/user/2
 	@GetMapping("/test/user/{id}")
-	public User findById(@PathVariable int id) {	
-		return userRepository.findById(id).get();
-	}
+	public String findById(@PathVariable int id) {
+		User userEntity = userRepository.findById(id).get();
+		System.out.println(userEntity);
+		return "ok";     
+	}  
 	
 	@GetMapping("/test/user/username/{username}")
 	public User findByUsername(@PathVariable String username) {
@@ -81,7 +83,12 @@ public class UserApiControllerTest {
 		return "update ok";
 	}
 	
+	//https://www.juso.go.kr/addrlink/addrLinkUrl.do?confmKey=devU01TX0FVVEgyMDIxMDcwNTE3MjgyMzExMTM2MTE=&returnUrl=http://localhost:8000/test/juso
 	
+	@PostMapping("/test/juso")
+	public String jusoTest(String roadFullAddr) {
+		return roadFullAddr;
+	}
 }
 
 
