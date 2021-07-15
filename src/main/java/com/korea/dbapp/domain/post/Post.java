@@ -21,10 +21,8 @@ public class Post {
 	private String content;
 	
 	@JoinColumn(name = "user_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User user; // ORM 사용
-	
-	
 
 	@Override
 	public String toString() {

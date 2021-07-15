@@ -8,7 +8,7 @@
 	<form action="/user/${principal.id}" method="post">
 		<div class="form-group">
 			<label for="username">Username:</label> 
-			<input value="${principal.username}"  type="text" class="form-control" placeholder="Enter username"  name="username"  readonly="readonly"/>
+			<input value="${principal.username}"  type="text" class="form-control" placeholder="Enter username"  readonly="readonly"/>
 		</div>
 		<div class="form-group">
 			<label for="password">Password:</label> 
@@ -16,7 +16,7 @@
 		</div>
 		<div class="form-group">
 			<label for="email">Email:</label> 
-			<input value="${principal.email}" type="email" class="form-control" placeholder="Enter email"  name="email"  readonly="readonly"/>
+			<input value="${principal.email}" type="email" class="form-control" placeholder="Enter email"  readonly="readonly"/>
 		</div>
 		
 		<input class="btn btn-info"  type="button" onClick="goPopup();" value="주소찾기"/>
