@@ -1,4 +1,4 @@
-package com.korea.dbapp.web;
+ package com.korea.dbapp.web;
 
 import javax.servlet.http.HttpSession;
 
@@ -7,22 +7,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.korea.dbapp.domain.user.User;
 import com.korea.dbapp.domain.user.UserRepository;
 import com.korea.dbapp.util.Script;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class UserController {
 
 	private final UserRepository userRepository;
 	private final HttpSession session;
-	
-	public UserController(UserRepository userRepository, HttpSession session) {
-		this.userRepository = userRepository;
-		this.session = session;
-	}
 
 	@GetMapping("/auth/joinForm")
 	public String joinForm() {
@@ -44,15 +43,21 @@ public class UserController {
 	
 	// RestController
 	@PostMapping("/auth/login")
-	public @ResponseBody String login(User user) {
-		User userEntity =  userRepository.mLogin(user.getUsername(), user.getPassword());
-		if(userEntity == null) {
-			
-			return Script.back("로그인 실패");
-		}else {
-			session.setAttribute("principal", userEntity);
-			return Script.href("/");
+	public @ResponseBody String login(@RequestBody User user) {
+		try {
+			User userEntity =  userRepository.mLogin(user.getUsername(), user.getPassword());
+			if(userEntity == null) {
+				
+				return "fail";
+			}else {
+				session.setAttribute("principal", userEntity);
+				return "ok";
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
 		}
+		
+
 	}
 	
 	@GetMapping("/user/logout")

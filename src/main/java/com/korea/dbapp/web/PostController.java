@@ -1,7 +1,11 @@
 package com.korea.dbapp.web;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,22 +16,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.korea.dbapp.domain.comment.Comment;
+import com.korea.dbapp.domain.comment.CommentRepository;
 import com.korea.dbapp.domain.post.Post;
 import com.korea.dbapp.domain.post.PostRepository;
 import com.korea.dbapp.domain.user.User;
-import com.korea.dbapp.util.Script;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class PostController {
-	
+
 	private final PostRepository postRepository;
 	private final HttpSession session;
+	private final HttpServletRequest request;
+	private final CommentRepository commentRepository;
 	
-	public PostController(PostRepository postRepository, HttpSession session) {
-		this.postRepository = postRepository;
-		this.session = session;
-	}
-
 	@GetMapping({"/", "/post"})
 	public String list(Model model) { // model = request
 		model.addAttribute("postsEntity", postRepository.findAll());
@@ -36,8 +41,13 @@ public class PostController {
 	
 	@GetMapping("/post/{id}")
 	public String detail(@PathVariable int id, Model model) {
+		
 		Post postEntity = postRepository.findById(id).get();
 		model.addAttribute("postEntity", postEntity);
+		
+		List<Comment> commentsEntity = commentRepository.mFindAllByPostId(id);
+		model.addAttribute("commentsEntity", commentsEntity);
+		
 		return "post/detail";
 	}
 	

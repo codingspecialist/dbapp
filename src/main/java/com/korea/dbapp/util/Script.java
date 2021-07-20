@@ -12,7 +12,7 @@ public class Script {
 		return sb.toString();
 	}
 	
-	public static String href(String uri) {
+	synchronized public static String href(String uri) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<script>");
 		sb.append("location.href = '"+uri+"';");
